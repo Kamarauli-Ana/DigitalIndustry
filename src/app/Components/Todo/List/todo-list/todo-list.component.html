@@ -1,0 +1,32 @@
+<table class="table table-striped">
+  <thead>
+    <th>#</th>
+    <th>მომხმარებელი</th>
+    <th>პროექტი</th>
+    <th>შემსრულებელი</th>
+    <th>თასქის ვადა</th>
+    <th>სტატუსი</th>
+    <th>
+      <a [routerLink]="['/addtodoitem']" class="btn btn-success">
+        <i style="cursor: pointer; margin-right: 5px;" class="fas fa-plus fa-lg"></i> დამატება
+      </a>
+    </th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let todo of TodoList.Todos; let i = index">
+      <td>{{i+1}}</td>
+      <td>{{todo.UserName}}</td>
+      <td>{{todo.Project}}</td>
+      <td>{{todo.Executer}}</td>
+      <td>{{todo.TaskDate | date: "dd/MM/yyyy"}}</td>
+      <td>{{todo.Status}}</td>
+      <td>
+        <a [routerLink]="['/edittodoitem', todo.id]">
+          <i style="cursor: pointer; margin-right: 5px;" class="far fa-edit fa-lg text-info"></i>
+        </a>
+        <i (click)="onDeleteTodoListItem(todo.id)" style="cursor: pointer"
+          class="fa fa-trash-alt fa-lg text-danger"></i>
+      </td>
+    </tr>
+  </tbody>
+</table>

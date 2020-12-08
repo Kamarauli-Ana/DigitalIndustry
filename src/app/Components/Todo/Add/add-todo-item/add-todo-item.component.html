@@ -1,0 +1,69 @@
+<div class="row" style="padding: 15px;">
+  <div class="col-md-3">
+    <label>მომხმარებელი</label>
+    <input [(ngModel)]="TodoItem.UserName" name="UserName" #UserName="ngModel" type="text" class="form-control"
+      required>
+    <div class="danger" *ngIf="UserName.touched && !UserName.valid">
+      <span style="color: brown;" *ngIf="UserName.errors.required">ველის შევსება აუცილებელია</span>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="padding: 15px;">
+  <div class="col-md-3">
+    <label>პროექტი</label>
+    <input [(ngModel)]="TodoItem.Project" name="Project" #Project="ngModel" type="text" class="form-control" required>
+    <div class="danger" *ngIf="Project.touched && !Project.valid">
+      <span style="color: brown;" *ngIf="Project.errors.required">ველის შევსება აუცილებელია</span>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="padding: 15px;">
+  <div class="col-md-3">
+    <label>შემსრულებელი</label>
+    <input [(ngModel)]="TodoItem.Executer" name="Executer" #Executer="ngModel" type="text" class="form-control"
+      required>
+    <div class="danger" *ngIf="Executer.touched && !Executer.valid">
+      <span style="color: brown;" *ngIf="Project.errors.required">ველის შევსება აუცილებელია</span>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="padding: 15px;">
+  <div class="col-md-3">
+    <label>თასქის ვადა</label>
+    <input [(ngModel)]="TodoItem.TaskDate" name="TaskDate" #TaskDate="ngModel" type="date" class="form-control"
+      required>
+    <div class="danger" *ngIf="TaskDate.touched && !TaskDate.valid">
+      <span style="color: brown;" *ngIf="TaskDate.errors.required">ველის შევსება აუცილებელია</span>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="padding: 15px;">
+  <div class="col-md-3">
+    <label>სტატუსი</label>
+    <select class="browser-default custom-select" [(ngModel)]="TodoItem.Status" name="Status" #Status="ngModel"
+      (change)="onStatusChange()">
+      <option *ngFor="let stat of TaskStatuses" value="{{stat}}">{{stat}}</option>
+    </select>
+
+    <div class="danger" *ngIf="Status.touched && StatusIsInvalid">
+      <span style="color: brown;" *ngIf="StatusIsInvalid">ველის შევსება აუცილებელია</span>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="padding: 15px;">
+  <div class="col-md-3">
+    <button
+      [disabled]="TaskDate.errors?.required || UserName.errors?.required || Project.errors?.required  || Executer.errors?.required || StatusIsInvalid"
+      (click)="onSaveItem()" class="btn btn-success">
+      <i style="cursor: pointer; margin-right: 5px;" class="fas fa-plus fa-lg"></i> შენახვა
+    </button>
+    <a style="margin-left: 15px;" [routerLink]="['/']" class="btn btn-secondary">
+      <i style="cursor: pointer; margin-right: 5px;" class="fas fa-home fa-lg"></i> მთავარზე დაბრუნება
+    </a>
+  </div>
+</div>
